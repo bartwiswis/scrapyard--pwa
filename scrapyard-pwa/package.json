@@ -1,0 +1,15 @@
+{
+  "name": "scrapyard-pwa",
+  "version": "1.0.0",
+  "description": "Local-network PWA for scrap metal intake, processing and dispatch",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "set-pin": "node set-pin.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
