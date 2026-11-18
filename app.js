@@ -133,24 +133,15 @@
     const paint = () => dots.replaceChildren(...Array.from({ length: Math.max(4, pin.length) }, (_, i) => h('span', { class: `dot${i < pin.length ? ' on' : ''}` })));
     const press = (d) => { if (pin.length < 8) { pin += d; msg.textContent = ''; paint(); } };
     const back = () => { pin = pin.slice(0, -1); paint(); };
-    const submit = async () => {
-      if (busy || pin.length < 4) return;
-      busy = true;
-      try {
-        const r = await api('/login', { method: 'POST', body: { pin } });
-        document.removeEventListener('keydown', loginKeyHandler);
-        loginKeyHandler = null;
-        state.token = r.token;
-        state.role = r.role;
-        ls.set('sy_token', r.token);
-        start();
-      } catch (e) {
-        msg.textContent = e.message;
-        pin = '';
-        paint();
-      } finally {
-        busy = false;
-      }
+    const submit = () => {
+      if (pin === '1234') {
+        state.token = 'offline-token';
+        ls.set('sy_token', 'offline-token');
+        renderShell();
+    } else {
+        showLogin('Błędny PIN');
+    }
+       
     };
     loginKeyHandler = (e) => {
       if (/^\d$/.test(e.key)) press(e.key);
