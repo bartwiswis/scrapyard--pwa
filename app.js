@@ -137,8 +137,8 @@
       if (pin === '1234') {
         state.token = 'offline-token';
         ls.set('sy_token', 'offline-token');
-        state.view
-        renderShell();
+        state.view = 'dashboard'                                     
+        renderShell();{
     } else {
         showLogin('Błędny PIN');
     }
